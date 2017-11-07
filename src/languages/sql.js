@@ -8,7 +8,7 @@ function(hljs) {
   var COMMENT_MODE = hljs.COMMENT('--', '$');
   return {
     case_insensitive: true,
-    illegal: /[<>{}*#]/,
+    illegal: /[<>{}*]/,
     contains: [
       {
         beginKeywords:
@@ -16,7 +16,7 @@ function(hljs) {
           'delete do handler insert load replace select truncate update set show pragma grant ' +
           'merge describe use explain help declare prepare execute deallocate release ' +
           'unlock purge reset change stop analyze cache flush optimize repair kill ' +
-          'install uninstall checksum restore check backup revoke',
+          'install uninstall checksum restore check backup revoke comment',
         end: /;/, endsWithParent: true,
         lexemes: /[\w\.]+/,
         keywords: {
@@ -155,11 +155,13 @@ function(hljs) {
           },
           hljs.C_NUMBER_MODE,
           hljs.C_BLOCK_COMMENT_MODE,
-          COMMENT_MODE
+          COMMENT_MODE,
+          hljs.HASH_COMMENT_MODE
         ]
       },
       hljs.C_BLOCK_COMMENT_MODE,
-      COMMENT_MODE
+      COMMENT_MODE,
+      hljs.HASH_COMMENT_MODE
     ]
   };
 }
